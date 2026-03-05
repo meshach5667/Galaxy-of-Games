@@ -782,34 +782,53 @@ body {
 #touch-controls {
   display: none;
   position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  gap: 12px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  gap: 10px;
   z-index: 5;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
-  #touch-controls { display: flex; }
+  #touch-controls { 
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+  }
   .games-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 }
 
 .touch-btn {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 12px;
-  width: 60px; height: 60px;
+  background: rgba(124, 58, 237, 0.7);
+  border: 2px solid rgba(124, 58, 237, 0.9);
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px;
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+  flex: 0 0 auto;
 }
 
-.touch-btn:active { background: rgba(255,255,255,0.3); transform: scale(0.92); }
+.touch-btn:active { 
+  background: rgba(124, 58, 237, 1);
+  transform: scale(0.88);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.8);
+}
+
+.touch-btn:hover {
+  background: rgba(124, 58, 237, 0.85);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+}
 </style>
 </head>
 <body>
@@ -918,11 +937,17 @@ body {
 
     <!-- Touch Controls -->
     <div id="touch-controls">
-      <button class="touch-btn" id="tc-left">◀</button>
-      <button class="touch-btn" id="tc-up">▲</button>
-      <button class="touch-btn" id="tc-action">🔵</button>
-      <button class="touch-btn" id="tc-down">▼</button>
-      <button class="touch-btn" id="tc-right">▶</button>
+      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
+        <button class="touch-btn" id="tc-up">▲</button>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
+        <button class="touch-btn" id="tc-left">◀</button>
+        <button class="touch-btn" id="tc-action">🔵</button>
+        <button class="touch-btn" id="tc-right">▶</button>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
+        <button class="touch-btn" id="tc-down">▼</button>
+      </div>
     </div>
   </div>
 </div>
