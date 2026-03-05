@@ -781,53 +781,91 @@ body {
 ============================================================ */
 #touch-controls {
   display: none;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  gap: 10px;
+  width: 100%;
+  flex-shrink: 0;
   z-index: 5;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  background: rgba(2, 6, 23, 0.95);
+  border-top: 1px solid rgba(124, 58, 237, 0.3);
+  padding: 8px 0 12px;
 }
 
 @media (max-width: 768px) {
-  #touch-controls { 
-    display: flex;
-    grid-template-columns: repeat(3, 1fr);
+  #touch-controls {
+    display: block;
+  }
+  #game-canvas-container {
+    flex: 1;
+    min-height: 0;
   }
   .games-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 }
 
+/* D-pad layout */
+.touch-dpad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.touch-dpad-arrows {
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  grid-template-rows: repeat(2, 48px);
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+}
+
+.touch-dpad-arrows .touch-btn-up    { grid-column: 2; grid-row: 1; }
+.touch-dpad-arrows .touch-btn-left  { grid-column: 1; grid-row: 2; }
+.touch-dpad-arrows .touch-btn-down  { grid-column: 2; grid-row: 2; }
+.touch-dpad-arrows .touch-btn-right { grid-column: 3; grid-row: 2; }
+
+.touch-dpad-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .touch-btn {
-  background: rgba(124, 58, 237, 0.7);
-  border: 2px solid rgba(124, 58, 237, 0.9);
+  background: rgba(124, 58, 237, 0.55);
+  border: 2px solid rgba(124, 58, 237, 0.8);
   border-radius: 50%;
-  width: 50px; 
-  height: 50px;
+  width: 48px;
+  height: 48px;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   cursor: pointer;
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.15s;
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
-  flex: 0 0 auto;
+  transition: background 0.1s, transform 0.1s;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
 }
 
-.touch-btn:active { 
+.touch-btn:active {
   background: rgba(124, 58, 237, 1);
   transform: scale(0.88);
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.8);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.8);
 }
 
-.touch-btn:hover {
-  background: rgba(124, 58, 237, 0.85);
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+.touch-btn.action-btn {
+  width: 62px;
+  height: 62px;
+  font-size: 1.5rem;
+  background: rgba(6, 182, 212, 0.45);
+  border-color: rgba(6, 182, 212, 0.8);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+}
+
+.touch-btn.action-btn:active {
+  background: rgba(6, 182, 212, 1);
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.8);
 }
 </style>
 </head>
@@ -935,18 +973,19 @@ body {
       </div>
     </div>
 
-    <!-- Touch Controls -->
-    <div id="touch-controls">
-      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
-        <button class="touch-btn" id="tc-up">▲</button>
+  </div>
+
+  <!-- Touch Controls - OUTSIDE canvas container so they never overlap game -->
+  <div id="touch-controls">
+    <div class="touch-dpad">
+      <div class="touch-dpad-arrows">
+        <button class="touch-btn touch-btn-up" id="tc-up">▲</button>
+        <button class="touch-btn touch-btn-left" id="tc-left">◀</button>
+        <button class="touch-btn touch-btn-down" id="tc-down">▼</button>
+        <button class="touch-btn touch-btn-right" id="tc-right">▶</button>
       </div>
-      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
-        <button class="touch-btn" id="tc-left">◀</button>
-        <button class="touch-btn" id="tc-action">🔵</button>
-        <button class="touch-btn" id="tc-right">▶</button>
-      </div>
-      <div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
-        <button class="touch-btn" id="tc-down">▼</button>
+      <div class="touch-dpad-action">
+        <button class="touch-btn action-btn" id="tc-action">🔵</button>
       </div>
     </div>
   </div>
