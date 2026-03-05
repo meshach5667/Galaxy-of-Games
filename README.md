@@ -1,3 +1,3 @@
 ## WHAT IS THIS?
 
-** A cool stuff
+- A cool stuff
